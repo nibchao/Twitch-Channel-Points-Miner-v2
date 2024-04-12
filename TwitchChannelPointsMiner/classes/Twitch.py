@@ -235,7 +235,7 @@ class Twitch(object):
             self.post_gql_request(json_data)
 
             logger.info(
-                f"Joining raid from {streamer} to {raid.target_login}!",
+                f"{streamer} raided {raid.target_login} | +250",
                 extra={"emoji": ":performing_arts:",
                        "event": Events.JOIN_RAID},
             )
