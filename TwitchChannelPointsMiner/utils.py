@@ -8,7 +8,7 @@ from os import path
 from random import randrange
 
 import requests
-from millify import millify
+from millify import millify, prettify
 
 from TwitchChannelPointsMiner.constants import USER_AGENTS, GITHUB_url
 
@@ -16,6 +16,8 @@ from TwitchChannelPointsMiner.constants import USER_AGENTS, GITHUB_url
 def _millify(input, precision=2):
     return millify(input, precision)
 
+def _prettify(input):
+    return prettify(input)
 
 def get_streamer_index(streamers: list, channel_id) -> int:
     try:

@@ -10,7 +10,7 @@ from TwitchChannelPointsMiner.classes.entities.Bet import BetSettings, DelayMode
 from TwitchChannelPointsMiner.classes.entities.Stream import Stream
 from TwitchChannelPointsMiner.classes.Settings import Events, Settings
 from TwitchChannelPointsMiner.constants import URL
-from TwitchChannelPointsMiner.utils import _millify
+from TwitchChannelPointsMiner.utils import _millify, _prettify
 
 logger = logging.getLogger(__name__)
 
@@ -82,6 +82,10 @@ class Streamer(object):
         "history",
         "streamer_url",
         "mutex",
+        "gained_points",
+        "watch_points",
+        "bonus_watch_points",
+        "watch_streak",
     ]
 
     def __init__(self, username, settings=None):
@@ -107,12 +111,17 @@ class Streamer(object):
 
         self.mutex = Lock()
 
+        self.gained_points = 0
+        self.watch_points = 0
+        self.bonus_watch_points = 0
+        self.watch_streak = 0
+
     def __repr__(self):
         return f"Streamer(username={self.username}, channel_id={self.channel_id}, channel_points={_millify(self.channel_points)})"
 
     def __str__(self):
         return (
-            f"{self.username} ({_millify(self.channel_points)} points)"
+            f"{self.username} ({_prettify(self.channel_points)} points)"
             if Settings.logger.less
             else self.__repr__()
         )
@@ -131,6 +140,23 @@ class Streamer(object):
                 "event": Events.STREAMER_OFFLINE,
             },
         )
+
+        if (self.gained_points > 0):
+            match self.watch_streak: # Handles watch streak points
+                case 300:
+                    logger.info(f"Watch Streak 2 | +{self.watch_streak}")
+                case 350:
+                    logger.info(f"Watch Streak 3 | +{self.watch_streak}")
+                case 400:
+                    logger.info(f"Watch Streak 4 | +{self.watch_streak}")
+                case 450:
+                    logger.info(f"Watch Streak 5 | +{self.watch_streak}") 
+            logger.info(f"+{_prettify(self.gained_points)} total points gained! Collected watch points {self.watch_points}x times and bonus points {self.bonus_watch_points}x times.")
+            self.watch_streak = 0
+            self.gained_points = 0
+            self.watch_points = 0
+            self.bonus_watch_points = 0
+            self.raid = None
 
     def set_online(self):
         if self.is_online is False:
