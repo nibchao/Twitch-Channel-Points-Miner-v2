@@ -67,13 +67,13 @@ class ClientIRC(SingleServerIRCBot):
 
         # also self._realname
         # if msg.startswith(f"@{self._nickname}"):
-        if mention != None and mention in msg.lower():
-            # nickname!username@nickname.tmi.twitch.tv
-            nick = event.source.split("!", 1)[0]
-            # chan = event.target
+        # if mention != None and mention in msg.lower():
+        #     # nickname!username@nickname.tmi.twitch.tv
+        #     nick = event.source.split("!", 1)[0]
+        #     # chan = event.target
 
-            logger.info(f"{nick} at {self.channel} wrote: {msg}", extra={
-                        "emoji": ":speech_balloon:", "event": Events.CHAT_MENTION})
+        #     logger.info(f"{nick} at {self.channel} wrote: {msg}", extra={
+        #                 "emoji": ":speech_balloon:", "event": Events.CHAT_MENTION})
     # """
 
 
