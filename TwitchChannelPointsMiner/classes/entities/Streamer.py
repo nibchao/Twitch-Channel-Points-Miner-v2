@@ -191,6 +191,18 @@ class Streamer(object):
 
         if reason_code == "WATCH_STREAK":
             self.stream.watch_streak_missing = False
+            
+    def update_points(self, earned):
+        self.gained_points += earned
+
+    def update_watch_points(self, earned):
+        self.watch_points += earned
+
+    def update_bonus_watch_points(self, earned):
+        self.bonus_watch_points += earned
+
+    def set_watch_streak_points(self, earned):
+        self.watch_streak = earned
 
     def stream_up_elapsed(self):
         return self.stream_up == 0 or ((time.time() - self.stream_up) > 120)
