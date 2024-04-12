@@ -147,8 +147,8 @@ class GlobalFormatter(logging.Formatter):
         if settings.time_zone:
             try:
                 self.timezone = pytz.timezone(settings.time_zone)
-                logging.info(
-                    f"Console logger time zone set to: {self.timezone}")
+                # logging.info(
+                #     f"Console logger time zone set to: {self.timezone}")
             except pytz.UnknownTimeZoneError:
                 logging.error(
                     f"Console logger: invalid time zone: {settings.time_zone}")
