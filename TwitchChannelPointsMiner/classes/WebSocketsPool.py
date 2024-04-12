@@ -205,16 +205,29 @@ class WebSocketsPool:
                             earned = message.data["point_gain"]["total_points"]
                             reason_code = message.data["point_gain"]["reason_code"]
 
-                            logger.info(
-                                f"+{earned} → {ws.streamers[streamer_index]} - Reason: {reason_code}.",
-                                extra={
-                                    "emoji": ":rocket:",
-                                    "event": Events.get(f"GAIN_FOR_{reason_code}"),
-                                },
-                            )
+                            if int(earned) != 250:
+                                logger.info(
+                                    # f"+{earned} → {ws.streamers[streamer_index]} - Reason: {reason_code}.",
+                                    f"{ws.streamers[streamer_index]} → +{earned}",
+                                    extra={
+                                        "emoji": ":rocket:",
+                                        "event": Events.get(f"GAIN_FOR_{reason_code}"),
+                                    },
+                                    
+                                )
                             ws.streamers[streamer_index].update_history(
                                 reason_code, earned
                             )
+
+                            if int(earned) != 250: # Handles updating total points gained for non-raids.
+                                ws.streamers[streamer_index].update_points(earned)
+                            if int(earned) >= 10 and int(earned) <= 20: # Update watch points (every 5 minutes)
+                                ws.streamers[streamer_index].update_watch_points(1)
+                            if int(earned) >= 50 and int(earned) <= 100: # Update bonus watch points (every 15 minutes)
+                                ws.streamers[streamer_index].update_bonus_watch_points(1)
+                            if int(earned) >= 300: # Update watch streak points (consecutive streams watched)
+                                ws.streamers[streamer_index].set_watch_streak_points(earned)
+
                             # Analytics switch
                             if Settings.enable_analytics is True:
                                 ws.streamers[streamer_index].persistent_annotations(
