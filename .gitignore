@@ -155,5 +155,4 @@ analytics/*
 keep_replit_alive.py
 .replit
 replit.nix
-example.py
 *.bat
