@@ -219,9 +219,9 @@ class TwitchChannelPointsMiner:
         if self.running:
             logger.error("You can't start multiple sessions of this instance!")
         else:
-            logger.info(
-                f"Start session: '{self.session_id}'", extra={"emoji": ":bomb:"}
-            )
+            # logger.info(
+            #     f"Start session: '{self.session_id}'", extra={"emoji": ":bomb:"}
+            # )
             self.running = True
             self.start_datetime = datetime.now()
 
