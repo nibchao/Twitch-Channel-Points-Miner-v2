@@ -288,7 +288,7 @@ def configure_loggers(username, settings):
                 else "%(asctime)s - %(message)s"
             ),
             datefmt=(
-                "%d/%m/%y %H:%M:%S" if settings.less is False else "%d/%m %H:%M:%S"
+                "%d/%m/%y %H:%M:%S" if settings.less is False else "[%b %d, %Y] %#I:%M %p"
             ),
             settings=settings,
         )
