@@ -1,10 +1,13 @@
 # Twitch endpoints
-URL = "https://www.twitch.tv"
+URL = "https://www.twitch.tv"               # Browser, Apps
+# URL = "https://m.twitch.tv"               # Mobile Browser
+# URL = "https://android.tv.twitch.tv"      # TV
 IRC = "irc.chat.twitch.tv"
 IRC_PORT = 6667
 WEBSOCKET = "wss://pubsub-edge.twitch.tv/v1"
 CLIENT_ID = "ue6666qo983tsx6so1t0vnawi233wa"        # TV
 # CLIENT_ID = "kimne78kx3ncx6brgo4mv6wki5h1ko"      # Browser
+# CLIENT_ID = "r8s4dac0uhzifbpu9sjdiwzctle17ff"     # Mobile Browser
 # CLIENT_ID = "kd1unb4b3q4t58fwlpcbzcbnm76a8fp"     # Android App
 # CLIENT_ID = "851cqzxpb9bqu9z6galo155du"           # iOS App
 DROP_ID = "c2542d6d-cd10-4532-919b-3d19f30a768b"
@@ -43,6 +46,15 @@ class GQLOperations:
             "persistedQuery": {
                 "version": 1,
                 "sha256Hash": "04e46329a6786ff3a81c01c50bfa5d725902507a0deb83b0edbf7abe7a3716ea",
+            }
+        },
+    }
+    PlaybackAccessToken = {
+        "operationName": "PlaybackAccessToken",
+        "extensions": {
+            "persistedQuery": {
+                "version": 1,
+                "sha256Hash": "3093517e37e4f4cb48906155bcd894150aef92617939236d2508f3375ab732ce",
             }
         },
     }
@@ -196,4 +208,22 @@ class GQLOperations:
                 "sha256Hash": "eecf815273d3d949e5cf0085cc5084cd8a1b5b7b6f7990cf43cb0beadf546907",
             }
         },
+    }
+    UserPointsContribution = {
+        "operationName": "UserPointsContribution",
+        "extensions": {
+            "persistedQuery": {
+                "version": 1,
+                "sha256Hash": "23ff2c2d60708379131178742327ead913b93b1bd6f665517a6d9085b73f661f"
+            }
+        }
+    }
+    ContributeCommunityPointsCommunityGoal = {
+        "operationName": "ContributeCommunityPointsCommunityGoal",
+        "extensions": {
+            "persistedQuery": {
+                "version": 1,
+                "sha256Hash": "5774f0ea5d89587d73021a2e03c3c44777d903840c608754a1be519f51e37bb6"
+            }
+        }
     }
